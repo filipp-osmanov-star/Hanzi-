@@ -1,0 +1,29 @@
+# Creates a PAID web service and persistent disk if you approve it in Render.
+# Nothing is deployed merely by merging this file into GitHub.
+services:
+  - type: web
+    name: hanzi-courses
+    runtime: python
+    plan: starter
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn --workers 1 --threads 8 --timeout 60 --bind 0.0.0.0:$PORT 'server:create_app()'
+    healthCheckPath: /healthz
+    disk:
+      name: hanzi-access
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.12
+      - key: BOT_TOKEN
+        sync: false
+      - key: ADMIN_IDS
+        sync: false
+      - key: BOT_USERNAME
+        sync: false
+      - key: ACCESS_DB
+        value: /var/data/access.sqlite3
+      - key: BOT_POLLING
+        value: '1'
+      - key: INIT_DATA_MAX_AGE
+        value: '86400'
