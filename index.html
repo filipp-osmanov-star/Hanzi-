@@ -63,6 +63,12 @@ progress{appearance:none;width:100%;height:7px;margin:10px 0;border:0;border-rad
 @media(min-width:620px){.lesson-grid{grid-template-columns:1fr 1fr}}@media(max-width:360px){#course-bar label{flex-basis:100%}}
 
 .header-actions{display:flex;align-items:center;gap:4px;flex-wrap:wrap;justify-content:flex-end;min-width:88px}.header-actions .chip{font-size:12px;padding:5px 9px;min-height:36px}.header-actions .tag{font-size:11px}#access-bar{max-width:720px;margin:0 auto;padding:4px 14px;display:flex;align-items:center;justify-content:space-between;gap:8px}#access-bar .chip{font-size:12px;min-height:36px;padding:5px 10px}#access-bar .small{font-size:12px}.locked-card{border-style:dashed}#access-package{display:block;max-width:100%;width:100%;margin:12px 0}.row>*{overflow-wrap:anywhere}.app-header>div:first-child{min-width:0}.app-header .small{overflow-wrap:anywhere}#language-switch{white-space:nowrap}
+
+/* Hanzi elements: stroke diagrams are inline SVG and work without external fonts. */
+.elements-heading{display:flex;justify-content:space-between;gap:12px;align-items:center;margin:12px 0}.elements-heading h1{font-size:28px;margin:0}.element-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}.element-stats>div{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 12px}.element-stats strong{display:block;font-size:27px;line-height:1.2}.element-stats span{font-size:12px;color:var(--mute)}.element-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.element-tabs button{border:1px solid var(--line);border-radius:99px;padding:10px 16px;font:inherit;background:var(--card);color:var(--ink)}.element-tabs button[aria-pressed=true]{background:var(--ink);color:var(--bg)}.element-toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.element-toolbar input{flex:1;min-width:160px}.element-toolbar select{margin:0;max-width:100%;min-height:44px}.element-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.element-tile{border:1px solid var(--line);border-radius:20px;background:var(--card);color:var(--ink);padding:16px 10px;min-width:0;display:flex;flex-direction:column;align-items:center;text-align:center;font:inherit;transition:transform .15s,box-shadow .15s}.element-tile:hover{transform:translateY(-2px);box-shadow:0 5px 20px #0001}.element-tile svg{width:100%;height:100px;max-width:125px}.element-tile .radical-symbol{font-size:65px;line-height:1.6}.element-tile strong{font-size:20px}.element-tile .element-meaning{font-size:12px;line-height:1.35;margin:6px 0;overflow-wrap:anywhere}.element-tile .element-pinyin{color:var(--seal);font-size:14px}.element-tile small{font-size:11px;color:var(--mute)}.element-art{max-width:230px;margin:auto}.element-art svg{display:block;width:100%;height:210px}.element-big-symbol{font-size:110px;line-height:1.6;text-align:center}.element-detail h2{font-size:24px;text-align:center}.element-detail p{line-height:1.65}.element-chip{display:inline-block;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:6px 10px;margin:3px;font-size:25px}.element-guide{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin:12px 0;font-size:14px}.element-quiz{text-align:center}.element-quiz .element-art{max-width:200px}.element-quiz-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0}.element-quiz-options button.b{font-size:15px;min-height:64px;margin:0}.element-caption{font-size:12px;color:var(--mute);text-align:center}.element-draw{height:300px;display:block}.element-status{display:flex;gap:8px;flex-wrap:wrap}.element-status .chip{flex:1;margin:0;text-align:center;min-width:85px}.element-back{font:inherit;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:10px 0;min-height:44px}.stroke-line{fill:none;stroke:currentColor;stroke-width:7;stroke-linecap:round;stroke-linejoin:round}.stroke-guide{fill:none;stroke:currentColor;stroke-width:7;opacity:.12;stroke-linecap:round;stroke-linejoin:round}.stroke-animation{stroke-dasharray:1;stroke-dashoffset:1;animation:stroke-demo 2s linear forwards}.stroke-start{fill:var(--seal);stroke:var(--card);stroke-width:1.5}.stroke-end{fill:var(--seal)}@keyframes stroke-demo{to{stroke-dashoffset:0}}@media(prefers-reduced-motion:reduce){.stroke-animation{animation:none;stroke-dashoffset:0}.element-tile{transition:none}}@media(max-width:400px){.element-grid{gap:8px}.element-tile{padding:12px 5px}.element-tile svg{height:85px}.element-tile .radical-symbol{font-size:52px}.element-quiz-options{grid-template-columns:1fr}.element-tabs button{padding:10px 13px}}
+
+
+#course-bar[hidden]{display:none}
 </style></head><body>
 <header class=app-header><div><strong>汉语 · Китайский</strong><div class=small><span id=course-subtitle>Уроки 1–16 · учись в своём темпе</span></div></div><div class=header-actions><span id=progress class=tag></span><button type=button class=chip id=language-switch>English</button></div></header><div id=storage-warning role=status></div><div id=course-bar></div><div id=access-bar></div><main id="app"></main>
 <div id="menu-backdrop" aria-hidden="true"></div>
@@ -235,7 +241,2407 @@ write(r){const pl=pool();if(!pl.length){r.innerHTML=filters()+'<div class=card>�
  $('#gd').onclick=()=>{x.save();x.globalAlpha=.18;x.fillStyle=x.strokeStyle;x.font=Math.min(170,(c.clientWidth-24)/g.h.length)+'px serif';x.textAlign='center';x.textBaseline='middle';x.fillText(g.h,c.clientWidth/2,130);x.restore()}},
 access:accessView,
 info(r){if(enMode()){r.innerHTML=englishInfo();return}r.innerHTML=`<div class=card><h2>Новые курсы и источники</h2><p>Учебник: уроки 1–16. Уроки 14–16 — подборки ключевой лексики с повторением, авторскими переводами, пояснениями и упражнениями. Это не полная постраничная сверка и не копия диалогов учебника. Урок 16 относится к первой книге, части 2.</p><p>HSK 1 и 2: экзаменационная программа ноября 2025 года. 300 позиций первого уровня и 200 новых второго. Одинаковое написание объединено в карточку; чтения и значения сохранены отдельно. Русские переводы и упражнения составлены для приложения. Тренажёр не заменяет полный экзаменационный вариант.</p><p><a href="https://www.chinesetest.cn/syllabus" target=_blank rel=noopener>Официальная программа HSK</a> · <a href="https://github.com/uranbekanarbaev/hsk-3.0-vocabulary-dataset/blob/main/SOURCES.md" target=_blank rel=noopener>Источник транскрипции списка</a> · <a href="https://www.blcup.com/PInfo/index/8660" target=_blank rel=noopener>Учебник у издателя</a></p><p class=small>Прогресс общий для одинакового написания во всех курсах. Ниже сохранена справка об исходной базе 1–13, а не описание новых курсов.</p></div><div class=card><h2>О материале</h2><p>${esc(DATA.info).replace(/\n/g,'<br>')}</p></div><div class=card><h2>Правила</h2>${DATA.rules.map(t=>`<p class=small style="color:var(--ink)">${esc(t)}</p>`).join('')}</div>`}};
-const TABS=[['lessons','Уроки'],['dict','Словарь'],['cards','Карточки'],['quiz','Тест'],['sent','Фразы'],['write','Пропись'],['fix','Ошибки'],['info','Инфо'],['access','Доступ']];
+const HANZI_ELEMENTS={
+  "strokes": [
+    {
+      "id": 1,
+      "h": "横",
+      "p": "héng",
+      "r": "Горизонтальная",
+      "note": "Слева направо. Держи направление ровным, без крюка на конце.",
+      "examples": "一",
+      "path": "M20 52 L82 48",
+      "code": "31D0"
+    },
+    {
+      "id": 2,
+      "h": "竖",
+      "p": "shù",
+      "r": "Вертикальная",
+      "note": "Сверху вниз. В этой форме нет крюка на конце.",
+      "examples": "十",
+      "path": "M50 16 L50 86",
+      "code": "31D1"
+    },
+    {
+      "id": 3,
+      "h": "撇",
+      "p": "piě",
+      "r": "Откидная влево",
+      "note": "Начни сверху справа и веди вниз влево, постепенно облегчая нажим.",
+      "examples": "人",
+      "path": "M75 15 Q65 60 22 85",
+      "code": "31D2"
+    },
+    {
+      "id": 4,
+      "h": "捺",
+      "p": "nà",
+      "r": "Откидная вправо",
+      "note": "Веди сверху слева вниз вправо. Ближе к концу линия раскрывается вправо.",
+      "examples": "人",
+      "path": "M24 18 Q48 65 83 82",
+      "code": "31CF"
+    },
+    {
+      "id": 5,
+      "h": "点",
+      "p": "diǎn",
+      "r": "Точка",
+      "note": "Короткое движение сверху слева вниз вправо. Это штрих, а не круглая точка.",
+      "examples": "六",
+      "path": "M40 32 Q53 39 60 58",
+      "code": "31D4"
+    },
+    {
+      "id": 6,
+      "h": "提",
+      "p": "tí",
+      "r": "Восходящая",
+      "note": "Снизу слева вверх вправо. Заверши движение острым выходом.",
+      "examples": "冰",
+      "path": "M25 67 L77 37",
+      "code": "31C0"
+    },
+    {
+      "id": 7,
+      "h": "竖钩",
+      "p": "shù gōu",
+      "r": "Вертикальная с крюком",
+      "note": "Веди вниз, затем сделай короткий крюк вверх влево, не отрывая руки.",
+      "examples": "小",
+      "path": "M55 15 L55 77 Q55 89 41 78",
+      "code": "31DA"
+    },
+    {
+      "id": 8,
+      "h": "弯钩",
+      "p": "wān gōu",
+      "r": "Изогнутая с крюком",
+      "note": "Проведи плавный изгиб вниз, затем короткий крюк влево вверх.",
+      "examples": "子",
+      "path": "M43 15 Q68 42 58 78 Q56 88 43 79",
+      "code": "31C1"
+    },
+    {
+      "id": 9,
+      "h": "斜钩",
+      "p": "xié gōu",
+      "r": "Наклонная с крюком",
+      "note": "По диагонали вниз вправо с плавным изгибом; внизу крюк вверх.",
+      "examples": "我",
+      "path": "M28 15 Q40 80 73 84 Q80 84 81 70",
+      "code": "31C2"
+    },
+    {
+      "id": 10,
+      "h": "横钩",
+      "p": "héng gōu",
+      "r": "Горизонтальная с крюком",
+      "note": "Слева направо, затем короткий крюк вниз влево.",
+      "examples": "写",
+      "path": "M18 35 L83 35 L73 49",
+      "code": "31D6"
+    },
+    {
+      "id": 11,
+      "h": "横折",
+      "p": "héng zhé",
+      "r": "Горизонтальная с поворотом вниз",
+      "note": "Слева направо, затем вниз. Поворот выполняется без отрыва руки.",
+      "examples": "口",
+      "path": "M20 22 L78 22 L78 83",
+      "code": "31D5"
+    },
+    {
+      "id": 12,
+      "h": "竖折",
+      "p": "shù zhé",
+      "r": "Вертикальная с поворотом вправо",
+      "note": "Сверху вниз, затем вправо; это одна непрерывная черта.",
+      "examples": "山",
+      "path": "M25 18 L25 78 L82 78",
+      "code": "31D7"
+    },
+    {
+      "id": 13,
+      "h": "横撇",
+      "p": "héng piě",
+      "r": "Горизонтальная с откидной влево",
+      "note": "Сначала вправо, затем поворот и откидная вниз влево.",
+      "examples": "又",
+      "path": "M22 25 L78 25 Q59 62 25 85",
+      "code": "31C7"
+    },
+    {
+      "id": 14,
+      "h": "撇折",
+      "p": "piě zhé",
+      "r": "Откидная влево с поворотом",
+      "note": "Вниз влево, затем поворот вправо с небольшим подъёмом.",
+      "examples": "云",
+      "path": "M63 20 L25 75 L82 63",
+      "code": "31DC"
+    },
+    {
+      "id": 15,
+      "h": "撇点",
+      "p": "piě diǎn",
+      "r": "Откидная влево с точкой",
+      "note": "Вниз влево, затем вправо вниз. Две части пишутся без отрыва.",
+      "examples": "女",
+      "path": "M60 16 L28 61 L77 84",
+      "code": "31DB"
+    },
+    {
+      "id": 16,
+      "h": "横折钩",
+      "p": "héng zhé gōu",
+      "r": "Горизонтальная с поворотом и крюком",
+      "note": "Вправо, затем вниз, в конце короткий крюк вверх влево.",
+      "examples": "月",
+      "path": "M22 20 L77 20 L77 77 Q77 88 63 78",
+      "code": "31C6"
+    },
+    {
+      "id": 17,
+      "h": "横折弯钩",
+      "p": "héng zhé wān gōu",
+      "r": "Горизонтальная с изгибом и крюком",
+      "note": "Вправо, затем вниз с изгибом; внизу поверни вправо и закончи крюком вверх.",
+      "examples": "九",
+      "path": "M18 28 L58 28 L53 70 Q52 82 66 82 L81 82 L83 68",
+      "code": "31C8"
+    },
+    {
+      "id": 18,
+      "h": "竖折弯钩",
+      "p": "shù zhé wān gōu",
+      "r": "Вертикальная с поворотами и крюком",
+      "note": "Вниз, затем вправо и снова вниз; в конце короткий крюк влево вверх.",
+      "examples": "马",
+      "path": "M28 18 L28 48 L77 48 L71 79 Q70 87 57 78",
+      "code": "31C9"
+    },
+    {
+      "id": 19,
+      "h": "竖弯钩",
+      "p": "shù wān gōu",
+      "r": "Вертикальная с изгибом и крюком",
+      "note": "Вниз, затем плавно поверни вправо и закончи коротким крюком вверх.",
+      "examples": "儿",
+      "path": "M35 16 L35 64 Q35 82 54 82 L79 82 L80 68",
+      "code": "31DF"
+    }
+  ],
+  "radicals": [
+    {
+      "id": 1,
+      "h": "一",
+      "p": "yī",
+      "r": "Один",
+      "strokes": 1,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 2,
+      "h": "丨",
+      "p": "gǔn",
+      "r": "Вертикальная черта",
+      "strokes": 1,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 3,
+      "h": "丶",
+      "p": "zhǔ",
+      "r": "Точка",
+      "strokes": 1,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 4,
+      "h": "丿",
+      "p": "piě",
+      "r": "Откидная влево",
+      "strokes": 1,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 5,
+      "h": "乙",
+      "p": "yǐ",
+      "r": "Второй циклический знак; изгиб",
+      "strokes": 1,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 6,
+      "h": "亅",
+      "p": "jué",
+      "r": "Крюк",
+      "strokes": 1,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 7,
+      "h": "二",
+      "p": "èr",
+      "r": "Два",
+      "strokes": 2,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 8,
+      "h": "亠",
+      "p": "tóu",
+      "r": "Крышка",
+      "strokes": 2,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 9,
+      "h": "人",
+      "p": "rén",
+      "r": "Человек",
+      "strokes": 2,
+      "variants": "亻",
+      "note": "Слева часто превращается в 亻: 你, 他. Этот компонент связан с человеком, но не даёт готового перевода всего знака.",
+      "examples": "你 他"
+    },
+    {
+      "id": 10,
+      "h": "儿",
+      "p": "ér",
+      "r": "Ноги; человек снизу",
+      "strokes": 2,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 11,
+      "h": "入",
+      "p": "rù",
+      "r": "Входить",
+      "strokes": 2,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 12,
+      "h": "八",
+      "p": "bā",
+      "r": "Восемь; разделение",
+      "strokes": 2,
+      "variants": "丷",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 13,
+      "h": "冂",
+      "p": "jiǒng",
+      "r": "Открытая рамка",
+      "strokes": 2,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 14,
+      "h": "冖",
+      "p": "mì",
+      "r": "Покрытие",
+      "strokes": 2,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 15,
+      "h": "冫",
+      "p": "bīng",
+      "r": "Лёд",
+      "strokes": 2,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 16,
+      "h": "几",
+      "p": "jī",
+      "r": "Столик",
+      "strokes": 2,
+      "variants": "⺇",
+      "note": "Как ключ читается jī и означает столик. Иероглиф 几 в значении «сколько» читается jǐ — это другое употребление.",
+      "examples": ""
+    },
+    {
+      "id": 17,
+      "h": "凵",
+      "p": "kǎn",
+      "r": "Открытая ёмкость",
+      "strokes": 2,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 18,
+      "h": "刀",
+      "p": "dāo",
+      "r": "Нож",
+      "strokes": 2,
+      "variants": "刂 ⺈",
+      "note": "",
+      "examples": "别 刚"
+    },
+    {
+      "id": 19,
+      "h": "力",
+      "p": "lì",
+      "r": "Сила",
+      "strokes": 2,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 20,
+      "h": "勹",
+      "p": "bāo",
+      "r": "Обёртывать",
+      "strokes": 2,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 21,
+      "h": "匕",
+      "p": "bǐ",
+      "r": "Ложка",
+      "strokes": 2,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 22,
+      "h": "匚",
+      "p": "fāng",
+      "r": "Короб с открытым боком",
+      "strokes": 2,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 23,
+      "h": "匸",
+      "p": "xǐ",
+      "r": "Укрытие",
+      "strokes": 2,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 24,
+      "h": "十",
+      "p": "shí",
+      "r": "Десять",
+      "strokes": 2,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 25,
+      "h": "卜",
+      "p": "bǔ",
+      "r": "Гадание",
+      "strokes": 2,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 26,
+      "h": "卩",
+      "p": "jié",
+      "r": "Печать; коленопреклонённый человек",
+      "strokes": 2,
+      "variants": "㔾",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 27,
+      "h": "厂",
+      "p": "hǎn",
+      "r": "Утёс",
+      "strokes": 2,
+      "variants": "厂",
+      "note": "Как традиционный ключ — hǎn, «утёс». Современное 厂 «завод» читается chǎng.",
+      "examples": ""
+    },
+    {
+      "id": 28,
+      "h": "厶",
+      "p": "sī",
+      "r": "Личный; частный",
+      "strokes": 2,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 29,
+      "h": "又",
+      "p": "yòu",
+      "r": "Правая рука; снова",
+      "strokes": 2,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 30,
+      "h": "口",
+      "p": "kǒu",
+      "r": "Рот",
+      "strokes": 3,
+      "variants": "",
+      "note": "Не путай 口 «рот» и более крупную внешнюю ограду 囗 (ключ №31).",
+      "examples": "吗 吃"
+    },
+    {
+      "id": 31,
+      "h": "囗",
+      "p": "wéi",
+      "r": "Ограда",
+      "strokes": 3,
+      "variants": "",
+      "note": "Окружает другие части: например, в 国. Не путай с самостоятельным 口 «рот».",
+      "examples": "国 园"
+    },
+    {
+      "id": 32,
+      "h": "土",
+      "p": "tǔ",
+      "r": "Земля",
+      "strokes": 3,
+      "variants": "",
+      "note": "В 士 верхняя горизонталь длиннее нижней; у 土 соотношение обычно обратное.",
+      "examples": "地 块"
+    },
+    {
+      "id": 33,
+      "h": "士",
+      "p": "shì",
+      "r": "Учёный; служилый человек",
+      "strokes": 3,
+      "variants": "",
+      "note": "Не путай с 土: у 士 верхняя горизонталь обычно длиннее нижней.",
+      "examples": ""
+    },
+    {
+      "id": 34,
+      "h": "夂",
+      "p": "zhǐ",
+      "r": "Идти; следовать",
+      "strokes": 3,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 35,
+      "h": "夊",
+      "p": "suī",
+      "r": "Медленно идти",
+      "strokes": 3,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 36,
+      "h": "夕",
+      "p": "xī",
+      "r": "Вечер",
+      "strokes": 3,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 37,
+      "h": "大",
+      "p": "dà",
+      "r": "Большой",
+      "strokes": 3,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 38,
+      "h": "女",
+      "p": "nǚ",
+      "r": "Женщина",
+      "strokes": 3,
+      "variants": "女",
+      "note": "",
+      "examples": "妈 好"
+    },
+    {
+      "id": 39,
+      "h": "子",
+      "p": "zǐ",
+      "r": "Ребёнок",
+      "strokes": 3,
+      "variants": "",
+      "note": "",
+      "examples": "孩 孙"
+    },
+    {
+      "id": 40,
+      "h": "宀",
+      "p": "mián",
+      "r": "Крыша",
+      "strokes": 3,
+      "variants": "",
+      "note": "Обычно располагается сверху: 家, 安. Условное название — «крыша».",
+      "examples": "家 安"
+    },
+    {
+      "id": 41,
+      "h": "寸",
+      "p": "cùn",
+      "r": "Цунь; мера длины",
+      "strokes": 3,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 42,
+      "h": "小",
+      "p": "xiǎo",
+      "r": "Маленький",
+      "strokes": 3,
+      "variants": "⺌ ⺍",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 43,
+      "h": "尢",
+      "p": "wāng",
+      "r": "Искривлённая нога",
+      "strokes": 3,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 44,
+      "h": "尸",
+      "p": "shī",
+      "r": "Тело; труп",
+      "strokes": 3,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 45,
+      "h": "屮",
+      "p": "chè",
+      "r": "Росток",
+      "strokes": 3,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 46,
+      "h": "山",
+      "p": "shān",
+      "r": "Гора",
+      "strokes": 3,
+      "variants": "",
+      "note": "",
+      "examples": "岩 峰"
+    },
+    {
+      "id": 47,
+      "h": "巛",
+      "p": "chuān",
+      "r": "Река",
+      "strokes": 3,
+      "variants": "川",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 48,
+      "h": "工",
+      "p": "gōng",
+      "r": "Работа; инструмент",
+      "strokes": 3,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 49,
+      "h": "己",
+      "p": "jǐ",
+      "r": "Сам; шестой циклический знак",
+      "strokes": 3,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 50,
+      "h": "巾",
+      "p": "jīn",
+      "r": "Ткань; полотенце",
+      "strokes": 3,
+      "variants": "",
+      "note": "",
+      "examples": "帽 帅"
+    },
+    {
+      "id": 51,
+      "h": "干",
+      "p": "gān",
+      "r": "Щит",
+      "strokes": 3,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 52,
+      "h": "幺",
+      "p": "yāo",
+      "r": "Тонкая нить; малый",
+      "strokes": 3,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 53,
+      "h": "广",
+      "p": "yǎn",
+      "r": "Навес",
+      "strokes": 3,
+      "variants": "广",
+      "note": "Традиционное чтение ключа — yǎn. Современное 广 «широкий» читается guǎng.",
+      "examples": "床 店"
+    },
+    {
+      "id": 54,
+      "h": "廴",
+      "p": "yǐn",
+      "r": "Длинный шаг",
+      "strokes": 3,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 55,
+      "h": "廾",
+      "p": "gǒng",
+      "r": "Две руки",
+      "strokes": 3,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 56,
+      "h": "弋",
+      "p": "yì",
+      "r": "Стрела с привязанной нитью",
+      "strokes": 3,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 57,
+      "h": "弓",
+      "p": "gōng",
+      "r": "Лук",
+      "strokes": 3,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 58,
+      "h": "彐",
+      "p": "jì",
+      "r": "Свиное рыло",
+      "strokes": 3,
+      "variants": "彑",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 59,
+      "h": "彡",
+      "p": "shān",
+      "r": "Волоски; узор",
+      "strokes": 3,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 60,
+      "h": "彳",
+      "p": "chì",
+      "r": "Шаг левой ногой",
+      "strokes": 3,
+      "variants": "",
+      "note": "",
+      "examples": "很 往"
+    },
+    {
+      "id": 61,
+      "h": "心",
+      "p": "xīn",
+      "r": "Сердце",
+      "strokes": 4,
+      "variants": "忄 ⺗",
+      "note": "Слева имеет форму 忄, внизу встречается 心 или ⺗. Часто участвует в знаках чувств и мыслей.",
+      "examples": "忙 想"
+    },
+    {
+      "id": 62,
+      "h": "戈",
+      "p": "gē",
+      "r": "Клевец; древнее оружие",
+      "strokes": 4,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 63,
+      "h": "戶",
+      "p": "hù",
+      "r": "Дверь; двор",
+      "strokes": 4,
+      "variants": "户 戸",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 64,
+      "h": "手",
+      "p": "shǒu",
+      "r": "Рука",
+      "strokes": 4,
+      "variants": "扌",
+      "note": "Слева обычно 扌: 打, 找. Часто участвует в обозначениях ручных действий.",
+      "examples": "打 找"
+    },
+    {
+      "id": 65,
+      "h": "支",
+      "p": "zhī",
+      "r": "Ветвь; поддерживать",
+      "strokes": 4,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 66,
+      "h": "攴",
+      "p": "pū",
+      "r": "Ударять",
+      "strokes": 4,
+      "variants": "攵",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 67,
+      "h": "文",
+      "p": "wén",
+      "r": "Письменность; узор",
+      "strokes": 4,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 68,
+      "h": "斗",
+      "p": "dǒu",
+      "r": "Ковш",
+      "strokes": 4,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 69,
+      "h": "斤",
+      "p": "jīn",
+      "r": "Топор; мера веса",
+      "strokes": 4,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 70,
+      "h": "方",
+      "p": "fāng",
+      "r": "Квадрат; сторона",
+      "strokes": 4,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 71,
+      "h": "无",
+      "p": "wú",
+      "r": "Отсутствие",
+      "strokes": 4,
+      "variants": "旡",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 72,
+      "h": "日",
+      "p": "rì",
+      "r": "Солнце; день",
+      "strokes": 4,
+      "variants": "",
+      "note": "Солнце и день. Сравни с 曰 (№73): различаются пропорциями и назначением.",
+      "examples": "明 时"
+    },
+    {
+      "id": 73,
+      "h": "曰",
+      "p": "yuē",
+      "r": "Говорить",
+      "strokes": 4,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 74,
+      "h": "月",
+      "p": "yuè",
+      "r": "Луна; месяц",
+      "strokes": 4,
+      "variants": "",
+      "note": "Луна или месяц. Похожий компонент 月 в названиях частей тела часто восходит к 肉 (№130).",
+      "examples": "明 期"
+    },
+    {
+      "id": 75,
+      "h": "木",
+      "p": "mù",
+      "r": "Дерево",
+      "strokes": 4,
+      "variants": "",
+      "note": "Дерево. В составе иероглифа может указывать на растения и деревянные предметы.",
+      "examples": "林 树"
+    },
+    {
+      "id": 76,
+      "h": "欠",
+      "p": "qiàn",
+      "r": "Недоставать; зевать",
+      "strokes": 4,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 77,
+      "h": "止",
+      "p": "zhǐ",
+      "r": "Останавливаться; стопа",
+      "strokes": 4,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 78,
+      "h": "歹",
+      "p": "dǎi",
+      "r": "Смерть; останки",
+      "strokes": 4,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 79,
+      "h": "殳",
+      "p": "shū",
+      "r": "Древковое оружие",
+      "strokes": 4,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 80,
+      "h": "毋",
+      "p": "wú",
+      "r": "Не следует; запрет",
+      "strokes": 4,
+      "variants": "母",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 81,
+      "h": "比",
+      "p": "bǐ",
+      "r": "Сравнивать",
+      "strokes": 4,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 82,
+      "h": "毛",
+      "p": "máo",
+      "r": "Шерсть; волосы",
+      "strokes": 4,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 83,
+      "h": "氏",
+      "p": "shì",
+      "r": "Род; фамилия",
+      "strokes": 4,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 84,
+      "h": "气",
+      "p": "qì",
+      "r": "Воздух; пар",
+      "strokes": 4,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 85,
+      "h": "水",
+      "p": "shuǐ",
+      "r": "Вода",
+      "strokes": 4,
+      "variants": "氵 氺",
+      "note": "Слева обычно 氵: 河, 海. Это вариант ключа 水, а не три отдельные точки.",
+      "examples": "河 海"
+    },
+    {
+      "id": 86,
+      "h": "火",
+      "p": "huǒ",
+      "r": "Огонь",
+      "strokes": 4,
+      "variants": "灬",
+      "note": "Внизу часто 灬: 热. Четыре точки здесь — вариант ключа огня.",
+      "examples": "热 灯"
+    },
+    {
+      "id": 87,
+      "h": "爪",
+      "p": "zhǎo",
+      "r": "Коготь",
+      "strokes": 4,
+      "variants": "爫",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 88,
+      "h": "父",
+      "p": "fù",
+      "r": "Отец",
+      "strokes": 4,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 89,
+      "h": "爻",
+      "p": "yáo",
+      "r": "Перекрещённые линии",
+      "strokes": 4,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 90,
+      "h": "爿",
+      "p": "pán",
+      "r": "Половина ствола; доска",
+      "strokes": 4,
+      "variants": "丬",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 91,
+      "h": "片",
+      "p": "piàn",
+      "r": "Щепка; пластина",
+      "strokes": 4,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 92,
+      "h": "牙",
+      "p": "yá",
+      "r": "Клык; зуб",
+      "strokes": 4,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 93,
+      "h": "牛",
+      "p": "niú",
+      "r": "Бык; корова",
+      "strokes": 4,
+      "variants": "牜 ⺧",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 94,
+      "h": "犬",
+      "p": "quǎn",
+      "r": "Собака",
+      "strokes": 4,
+      "variants": "犭",
+      "note": "",
+      "examples": "狗 猫"
+    },
+    {
+      "id": 95,
+      "h": "玄",
+      "p": "xuán",
+      "r": "Тёмный; сокровенный",
+      "strokes": 5,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 96,
+      "h": "玉",
+      "p": "yù",
+      "r": "Нефрит",
+      "strokes": 5,
+      "variants": "王 ⺩",
+      "note": "В составе часто выглядит как 王: 理, 珠. Это позиционная форма ключа 玉.",
+      "examples": "理 珠"
+    },
+    {
+      "id": 97,
+      "h": "瓜",
+      "p": "guā",
+      "r": "Дыня",
+      "strokes": 5,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 98,
+      "h": "瓦",
+      "p": "wǎ",
+      "r": "Черепица",
+      "strokes": 5,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 99,
+      "h": "甘",
+      "p": "gān",
+      "r": "Сладкий",
+      "strokes": 5,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 100,
+      "h": "生",
+      "p": "shēng",
+      "r": "Рождаться; жизнь",
+      "strokes": 5,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 101,
+      "h": "用",
+      "p": "yòng",
+      "r": "Использовать",
+      "strokes": 5,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 102,
+      "h": "田",
+      "p": "tián",
+      "r": "Поле",
+      "strokes": 5,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 103,
+      "h": "疋",
+      "p": "pǐ",
+      "r": "Кусок ткани; нога",
+      "strokes": 5,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 104,
+      "h": "疒",
+      "p": "nè",
+      "r": "Болезнь",
+      "strokes": 5,
+      "variants": "疒",
+      "note": "",
+      "examples": "病 疼"
+    },
+    {
+      "id": 105,
+      "h": "癶",
+      "p": "bō",
+      "r": "Расходящиеся ноги",
+      "strokes": 5,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 106,
+      "h": "白",
+      "p": "bái",
+      "r": "Белый",
+      "strokes": 5,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 107,
+      "h": "皮",
+      "p": "pí",
+      "r": "Кожа; шкура",
+      "strokes": 5,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 108,
+      "h": "皿",
+      "p": "mǐn",
+      "r": "Сосуд",
+      "strokes": 5,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 109,
+      "h": "目",
+      "p": "mù",
+      "r": "Глаз",
+      "strokes": 5,
+      "variants": "",
+      "note": "",
+      "examples": "眼 睛"
+    },
+    {
+      "id": 110,
+      "h": "矛",
+      "p": "máo",
+      "r": "Копьё",
+      "strokes": 5,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 111,
+      "h": "矢",
+      "p": "shǐ",
+      "r": "Стрела",
+      "strokes": 5,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 112,
+      "h": "石",
+      "p": "shí",
+      "r": "Камень",
+      "strokes": 5,
+      "variants": "",
+      "note": "",
+      "examples": "矿 码"
+    },
+    {
+      "id": 113,
+      "h": "示",
+      "p": "shì",
+      "r": "Алтарь; показывать",
+      "strokes": 5,
+      "variants": "礻",
+      "note": "Слева обычно 礻. Не путай с 衤 «одежда» (№145): у неё есть дополнительная черта.",
+      "examples": "社 礼"
+    },
+    {
+      "id": 114,
+      "h": "禸",
+      "p": "róu",
+      "r": "След зверя",
+      "strokes": 5,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 115,
+      "h": "禾",
+      "p": "hé",
+      "r": "Злак",
+      "strokes": 5,
+      "variants": "",
+      "note": "",
+      "examples": "秋 种"
+    },
+    {
+      "id": 116,
+      "h": "穴",
+      "p": "xué",
+      "r": "Пещера",
+      "strokes": 5,
+      "variants": "",
+      "note": "",
+      "examples": "空 穿"
+    },
+    {
+      "id": 117,
+      "h": "立",
+      "p": "lì",
+      "r": "Стоять",
+      "strokes": 5,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 118,
+      "h": "竹",
+      "p": "zhú",
+      "r": "Бамбук",
+      "strokes": 6,
+      "variants": "⺮",
+      "note": "Сверху обычно ⺮: 笔, 笑. Две группы коротких черт представляют бамбук.",
+      "examples": "笔 笑"
+    },
+    {
+      "id": 119,
+      "h": "米",
+      "p": "mǐ",
+      "r": "Рис",
+      "strokes": 6,
+      "variants": "",
+      "note": "",
+      "examples": "粉 粮"
+    },
+    {
+      "id": 120,
+      "h": "糸",
+      "p": "mì",
+      "r": "Шёлк",
+      "strokes": 6,
+      "variants": "糹 纟",
+      "note": "Слева традиционное 糹; в упрощённой письменности — 纟: 红, 纸.",
+      "examples": "红 纸"
+    },
+    {
+      "id": 121,
+      "h": "缶",
+      "p": "fǒu",
+      "r": "Глиняный кувшин",
+      "strokes": 6,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 122,
+      "h": "网",
+      "p": "wǎng",
+      "r": "Сеть",
+      "strokes": 6,
+      "variants": "罒 罓",
+      "note": "",
+      "examples": "罗 罚"
+    },
+    {
+      "id": 123,
+      "h": "羊",
+      "p": "yáng",
+      "r": "Баран; овца",
+      "strokes": 6,
+      "variants": "⺶ ⺷",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 124,
+      "h": "羽",
+      "p": "yǔ",
+      "r": "Перья",
+      "strokes": 6,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 125,
+      "h": "老",
+      "p": "lǎo",
+      "r": "Старый",
+      "strokes": 6,
+      "variants": "耂",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 126,
+      "h": "而",
+      "p": "ér",
+      "r": "Борода; а также",
+      "strokes": 6,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 127,
+      "h": "耒",
+      "p": "lěi",
+      "r": "Плуг",
+      "strokes": 6,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 128,
+      "h": "耳",
+      "p": "ěr",
+      "r": "Ухо",
+      "strokes": 6,
+      "variants": "",
+      "note": "",
+      "examples": "听 聊"
+    },
+    {
+      "id": 129,
+      "h": "聿",
+      "p": "yù",
+      "r": "Кисть для письма",
+      "strokes": 6,
+      "variants": "⺺ ⺻",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 130,
+      "h": "肉",
+      "p": "ròu",
+      "r": "Мясо",
+      "strokes": 6,
+      "variants": "月 ⺼",
+      "note": "В составных знаках часто выглядит как 月: 肚, 腿. Не всякая форма 月 обозначает луну.",
+      "examples": "肚 腿"
+    },
+    {
+      "id": 131,
+      "h": "臣",
+      "p": "chén",
+      "r": "Слуга",
+      "strokes": 6,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 132,
+      "h": "自",
+      "p": "zì",
+      "r": "Нос; сам",
+      "strokes": 6,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 133,
+      "h": "至",
+      "p": "zhì",
+      "r": "Достигать",
+      "strokes": 6,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 134,
+      "h": "臼",
+      "p": "jiù",
+      "r": "Ступка",
+      "strokes": 6,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 135,
+      "h": "舌",
+      "p": "shé",
+      "r": "Язык",
+      "strokes": 6,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 136,
+      "h": "舛",
+      "p": "chuǎn",
+      "r": "Противоположные ноги",
+      "strokes": 6,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 137,
+      "h": "舟",
+      "p": "zhōu",
+      "r": "Лодка",
+      "strokes": 6,
+      "variants": "",
+      "note": "",
+      "examples": "船 航"
+    },
+    {
+      "id": 138,
+      "h": "艮",
+      "p": "gèn",
+      "r": "Останавливаться; граница",
+      "strokes": 6,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 139,
+      "h": "色",
+      "p": "sè",
+      "r": "Цвет",
+      "strokes": 6,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 140,
+      "h": "艸",
+      "p": "cǎo",
+      "r": "Трава",
+      "strokes": 6,
+      "variants": "艹",
+      "note": "Сверху обычно 艹: 花, 茶. Традиционная форма ключа — 艸.",
+      "examples": "花 茶"
+    },
+    {
+      "id": 141,
+      "h": "虍",
+      "p": "hū",
+      "r": "Тигр",
+      "strokes": 6,
+      "variants": "虍",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 142,
+      "h": "虫",
+      "p": "chóng",
+      "r": "Насекомое",
+      "strokes": 6,
+      "variants": "",
+      "note": "",
+      "examples": "蚂 蛇"
+    },
+    {
+      "id": 143,
+      "h": "血",
+      "p": "xuè",
+      "r": "Кровь",
+      "strokes": 6,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 144,
+      "h": "行",
+      "p": "xíng",
+      "r": "Движение; идти",
+      "strokes": 6,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 145,
+      "h": "衣",
+      "p": "yī",
+      "r": "Одежда",
+      "strokes": 6,
+      "variants": "衤",
+      "note": "Слева обычно 衤: 裤, 被. Не путай с похожим 礻 «алтарь» (№113).",
+      "examples": "裤 被"
+    },
+    {
+      "id": 146,
+      "h": "襾",
+      "p": "yà",
+      "r": "Покрывать",
+      "strokes": 6,
+      "variants": "覀",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 147,
+      "h": "見",
+      "p": "jiàn",
+      "r": "Видеть",
+      "strokes": 7,
+      "variants": "见",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 148,
+      "h": "角",
+      "p": "jiǎo",
+      "r": "Рог",
+      "strokes": 7,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 149,
+      "h": "言",
+      "p": "yán",
+      "r": "Речь",
+      "strokes": 7,
+      "variants": "讠",
+      "note": "Традиционная форма 言; слева в упрощённых знаках обычно 讠: 说, 话.",
+      "examples": "说 话"
+    },
+    {
+      "id": 150,
+      "h": "谷",
+      "p": "gǔ",
+      "r": "Долина",
+      "strokes": 7,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 151,
+      "h": "豆",
+      "p": "dòu",
+      "r": "Боб",
+      "strokes": 7,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 152,
+      "h": "豕",
+      "p": "shǐ",
+      "r": "Свинья",
+      "strokes": 7,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 153,
+      "h": "豸",
+      "p": "zhì",
+      "r": "Зверь",
+      "strokes": 7,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 154,
+      "h": "貝",
+      "p": "bèi",
+      "r": "Раковина; ценность",
+      "strokes": 7,
+      "variants": "贝",
+      "note": "",
+      "examples": "财 购"
+    },
+    {
+      "id": 155,
+      "h": "赤",
+      "p": "chì",
+      "r": "Красный",
+      "strokes": 7,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 156,
+      "h": "走",
+      "p": "zǒu",
+      "r": "Идти; бежать",
+      "strokes": 7,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 157,
+      "h": "足",
+      "p": "zú",
+      "r": "Стопа; нога",
+      "strokes": 7,
+      "variants": "⻊",
+      "note": "",
+      "examples": "跑 跳"
+    },
+    {
+      "id": 158,
+      "h": "身",
+      "p": "shēn",
+      "r": "Тело",
+      "strokes": 7,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 159,
+      "h": "車",
+      "p": "chē",
+      "r": "Повозка",
+      "strokes": 7,
+      "variants": "车",
+      "note": "",
+      "examples": "辆 轮"
+    },
+    {
+      "id": 160,
+      "h": "辛",
+      "p": "xīn",
+      "r": "Горький; острый",
+      "strokes": 7,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 161,
+      "h": "辰",
+      "p": "chén",
+      "r": "Время; циклический знак",
+      "strokes": 7,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 162,
+      "h": "辵",
+      "p": "chuò",
+      "r": "Движение; путь",
+      "strokes": 7,
+      "variants": "辶",
+      "note": "Часто окружает знак снизу и слева в форме 辶: 这, 近.",
+      "examples": "这 近"
+    },
+    {
+      "id": 163,
+      "h": "邑",
+      "p": "yì",
+      "r": "Город",
+      "strokes": 7,
+      "variants": "阝（справа）",
+      "note": "В составе справа обычно 阝: 都, 部. Похожая форма слева относится к 阜 (№170).",
+      "examples": "都 部"
+    },
+    {
+      "id": 164,
+      "h": "酉",
+      "p": "yǒu",
+      "r": "Винный сосуд",
+      "strokes": 7,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 165,
+      "h": "釆",
+      "p": "biàn",
+      "r": "Различать; разделять",
+      "strokes": 7,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 166,
+      "h": "里",
+      "p": "lǐ",
+      "r": "Деревня; мера расстояния",
+      "strokes": 7,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 167,
+      "h": "金",
+      "p": "jīn",
+      "r": "Металл; золото",
+      "strokes": 8,
+      "variants": "钅",
+      "note": "",
+      "examples": "钱 银"
+    },
+    {
+      "id": 168,
+      "h": "長",
+      "p": "cháng",
+      "r": "Длинный",
+      "strokes": 8,
+      "variants": "长",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 169,
+      "h": "門",
+      "p": "mén",
+      "r": "Ворота",
+      "strokes": 8,
+      "variants": "门",
+      "note": "",
+      "examples": "问 间"
+    },
+    {
+      "id": 170,
+      "h": "阜",
+      "p": "fù",
+      "r": "Холм",
+      "strokes": 8,
+      "variants": "阝（слева）",
+      "note": "В составе слева обычно 阝: 阳, 院. Похожая форма справа относится к 邑 (№163).",
+      "examples": "阳 院"
+    },
+    {
+      "id": 171,
+      "h": "隶",
+      "p": "lì",
+      "r": "Достигать; ловить",
+      "strokes": 8,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 172,
+      "h": "隹",
+      "p": "zhuī",
+      "r": "Короткохвостая птица",
+      "strokes": 8,
+      "variants": "",
+      "note": "",
+      "examples": "难 集"
+    },
+    {
+      "id": 173,
+      "h": "雨",
+      "p": "yǔ",
+      "r": "Дождь",
+      "strokes": 8,
+      "variants": "",
+      "note": "",
+      "examples": "雪 雷"
+    },
+    {
+      "id": 174,
+      "h": "靑",
+      "p": "qīng",
+      "r": "Сине-зелёный",
+      "strokes": 8,
+      "variants": "青",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 175,
+      "h": "非",
+      "p": "fēi",
+      "r": "Не; отрицание",
+      "strokes": 8,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 176,
+      "h": "面",
+      "p": "miàn",
+      "r": "Лицо",
+      "strokes": 9,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 177,
+      "h": "革",
+      "p": "gé",
+      "r": "Выделанная кожа",
+      "strokes": 9,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 178,
+      "h": "韋",
+      "p": "wéi",
+      "r": "Дублёная кожа; окружать",
+      "strokes": 9,
+      "variants": "韦",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 179,
+      "h": "韭",
+      "p": "jiǔ",
+      "r": "Лук-порей",
+      "strokes": 9,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 180,
+      "h": "音",
+      "p": "yīn",
+      "r": "Звук",
+      "strokes": 9,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 181,
+      "h": "頁",
+      "p": "yè",
+      "r": "Голова",
+      "strokes": 9,
+      "variants": "页",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 182,
+      "h": "風",
+      "p": "fēng",
+      "r": "Ветер",
+      "strokes": 9,
+      "variants": "风",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 183,
+      "h": "飛",
+      "p": "fēi",
+      "r": "Лететь",
+      "strokes": 9,
+      "variants": "飞",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 184,
+      "h": "食",
+      "p": "shí",
+      "r": "Еда",
+      "strokes": 9,
+      "variants": "饣",
+      "note": "",
+      "examples": "饭 饮"
+    },
+    {
+      "id": 185,
+      "h": "首",
+      "p": "shǒu",
+      "r": "Голова; начало",
+      "strokes": 9,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 186,
+      "h": "香",
+      "p": "xiāng",
+      "r": "Аромат",
+      "strokes": 9,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 187,
+      "h": "馬",
+      "p": "mǎ",
+      "r": "Лошадь",
+      "strokes": 10,
+      "variants": "马",
+      "note": "",
+      "examples": "骑 驶"
+    },
+    {
+      "id": 188,
+      "h": "骨",
+      "p": "gǔ",
+      "r": "Кость",
+      "strokes": 10,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 189,
+      "h": "高",
+      "p": "gāo",
+      "r": "Высокий",
+      "strokes": 10,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 190,
+      "h": "髟",
+      "p": "biāo",
+      "r": "Длинные волосы",
+      "strokes": 10,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 191,
+      "h": "鬥",
+      "p": "dòu",
+      "r": "Борьба",
+      "strokes": 10,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 192,
+      "h": "鬯",
+      "p": "chàng",
+      "r": "Жертвенное вино",
+      "strokes": 10,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 193,
+      "h": "鬲",
+      "p": "lì",
+      "r": "Треножник для варки",
+      "strokes": 10,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 194,
+      "h": "鬼",
+      "p": "guǐ",
+      "r": "Дух; призрак",
+      "strokes": 10,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 195,
+      "h": "魚",
+      "p": "yú",
+      "r": "Рыба",
+      "strokes": 11,
+      "variants": "鱼",
+      "note": "",
+      "examples": "鲜 鲤"
+    },
+    {
+      "id": 196,
+      "h": "鳥",
+      "p": "niǎo",
+      "r": "Птица",
+      "strokes": 11,
+      "variants": "鸟",
+      "note": "",
+      "examples": "鸡 鸭"
+    },
+    {
+      "id": 197,
+      "h": "鹵",
+      "p": "lǔ",
+      "r": "Соль",
+      "strokes": 11,
+      "variants": "卤",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 198,
+      "h": "鹿",
+      "p": "lù",
+      "r": "Олень",
+      "strokes": 11,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 199,
+      "h": "麥",
+      "p": "mài",
+      "r": "Пшеница",
+      "strokes": 11,
+      "variants": "麦",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 200,
+      "h": "麻",
+      "p": "má",
+      "r": "Конопля",
+      "strokes": 11,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 201,
+      "h": "黃",
+      "p": "huáng",
+      "r": "Жёлтый",
+      "strokes": 12,
+      "variants": "黄",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 202,
+      "h": "黍",
+      "p": "shǔ",
+      "r": "Просо",
+      "strokes": 12,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 203,
+      "h": "黑",
+      "p": "hēi",
+      "r": "Чёрный",
+      "strokes": 12,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 204,
+      "h": "黹",
+      "p": "zhǐ",
+      "r": "Вышивать",
+      "strokes": 12,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 205,
+      "h": "黽",
+      "p": "mǐn",
+      "r": "Лягушка",
+      "strokes": 13,
+      "variants": "黾",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 206,
+      "h": "鼎",
+      "p": "dǐng",
+      "r": "Треножник",
+      "strokes": 13,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 207,
+      "h": "鼓",
+      "p": "gǔ",
+      "r": "Барабан",
+      "strokes": 13,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 208,
+      "h": "鼠",
+      "p": "shǔ",
+      "r": "Мышь",
+      "strokes": 13,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 209,
+      "h": "鼻",
+      "p": "bí",
+      "r": "Нос",
+      "strokes": 14,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 210,
+      "h": "齊",
+      "p": "qí",
+      "r": "Ровный",
+      "strokes": 14,
+      "variants": "齐",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 211,
+      "h": "齒",
+      "p": "chǐ",
+      "r": "Зубы",
+      "strokes": 15,
+      "variants": "齿",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 212,
+      "h": "龍",
+      "p": "lóng",
+      "r": "Дракон",
+      "strokes": 16,
+      "variants": "龙",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 213,
+      "h": "龜",
+      "p": "guī",
+      "r": "Черепаха",
+      "strokes": 16,
+      "variants": "龟",
+      "note": "",
+      "examples": ""
+    },
+    {
+      "id": 214,
+      "h": "龠",
+      "p": "yuè",
+      "r": "Древняя флейта",
+      "strokes": 17,
+      "variants": "",
+      "note": "",
+      "examples": ""
+    }
+  ]
+};
+// Isolated component vocabulary and progress; original cc2 word data stays independent.
+let elementProgress={},elementStorageOK=true,elementCanvasObserver=null;
+try{const raw=JSON.parse(localStorage.getItem('cc2-hanzi-elements-v1')||'{}');if(!raw||typeof raw!=='object'||Array.isArray(raw))throw Error('invalid');for(const [k,v]of Object.entries(raw)){const [kind,id]=k.split(':');if(HANZI_ELEMENTS[kind]?.some(e=>e.id===+id)&&v&&['know','mix','dont'].includes(v.s))elementProgress[k]={s:v.s,n:Number.isFinite(v.n)?Math.max(0,v.n):0};}}catch(e){elementStorageOK=false;}
+const elementState={strokes:{mode:'study',q:'',filter:'all',count:0,detail:null,quiz:null},radicals:{mode:'study',q:'',filter:'all',count:0,detail:null,quiz:null}};
+const elementStatus=e=>({know:'Освоено',mix:'Изучается',dont:'К повторению'}[e]||'Новое');
+function elementSave(){try{localStorage.setItem('cc2-hanzi-elements-v1',JSON.stringify(elementProgress));}catch(e){elementStorageOK=false;}}
+function elementMark(kind,id,status){const key=kind+':'+id;elementProgress[key]={s:status,n:(elementProgress[key]?.n||0)+1};elementSave();}
+function elementPool(kind){const t=elementState[kind],q=normalize(t.q);return HANZI_ELEMENTS[kind].filter(e=>{const st=elementProgress[kind+':'+e.id]?.s;return (!q||normalize([e.id,e.h,e.p,e.r,e.variants||'',e.examples||'',UI_EN[e.r]||''].join(' ')).includes(q))&&(!t.count||e.strokes===t.count)&&(t.filter==='all'||(t.filter==='new'?!st:t.filter==='review'?st&&st!=='know':st==='know'));});}
+function elementSvg(e,animate=false){const start=e.path.match(/^M([\d.]+) ([\d.]+)/);return `<svg viewBox="0 0 100 100" role="img" aria-label="${esc(e.r)}"><path class="stroke-guide" d="${e.path}"/><path class="stroke-line ${animate?'stroke-animation':''}" pathLength="1" d="${e.path}"/>${animate?`<circle class="stroke-start" cx="${start[1]}" cy="${start[2]}" r="3"/>`:''}</svg>`;}
+function elementVisual(kind,e,animate=false){return kind==='strokes'?elementSvg(e,animate):`<div class="zh element-big-symbol" lang="zh">${e.h}</div>`;}
+function elementIntro(kind){return kind==='strokes'?'Черта — одно движение без отрыва руки. Здесь 19 учебных форм; это начальная подборка, а не все возможные черты китайской письменности.':'Ключ (部首) — компонент для поиска иероглифа в словаре. Здесь все 214 ключей Канси. Ключи состоят из черт; не каждый компонент иероглифа является его словарным ключом.';}
+function elementToolbar(kind){const t=elementState[kind];return `<div class="element-toolbar"><label for="element-search" class="sr-only" style="position:absolute;clip:rect(0,0,0,0)">Поиск по элементам</label><input id="element-search" type="search" placeholder="Символ, пиньинь, значение или номер" value="${esc(t.q)}"><select id="element-filter" aria-label="Фильтр по изучению">${[['all','Все'],['new','Новые'],['review','К повторению'],['know','Освоенные']].map(([k,n])=>`<option value="${k}" ${t.filter===k?'selected':''}>${n}</option>`).join('')}</select>${kind==='radicals'?`<select id="element-count" aria-label="Количество черт в традиционном ключе"><option value="0">Любое число черт</option>${[...new Set(HANZI_ELEMENTS.radicals.map(e=>e.strokes))].map(n=>`<option value="${n}" ${t.count===n?'selected':''}>${n} черт</option>`).join('')}</select>`:''}</div>`;}
+function elementView(kind,r){if(elementCanvasObserver){elementCanvasObserver.disconnect();elementCanvasObserver=null;}const data=HANZI_ELEMENTS[kind],t=elementState[kind];
+ const known=data.filter(e=>elementProgress[kind+':'+e.id]?.s==='know').length,review=data.filter(e=>['mix','dont'].includes(elementProgress[kind+':'+e.id]?.s)).length;
+ r.innerHTML=`<div class="elements-heading"><div><span class="small">ХАНЬЦЗЫ · ${kind==='strokes'?'汉字笔画':'部首'}</span><h1>${kind==='strokes'?'Черты':'Ключи Канси'}</h1></div><span class="tag">${data.length} в каталоге</span></div><div class="element-stats"><div><strong>${data.length}</strong><span>в каталоге</span></div><div><strong>${known}</strong><span>освоено</span></div><div><strong>${review}</strong><span>к повторению</span></div></div><div class="element-tabs" aria-label="Режим изучения">${[['study','Изучать'],['write','Писать'],['quiz','Тесты']].map(([k,n])=>`<button data-emode="${k}" aria-pressed="${t.mode===k}">${n}</button>`).join('')}<button id="element-other">${kind==='strokes'?'Ключи →':'Черты →'}</button></div><p class="small">${elementIntro(kind)}</p>${!elementStorageOK?'<p role="status">Не удалось прочитать или сохранить прогресс элементов. Проверь хранилище браузера.</p>':''}<div id="element-content"></div>`;
+ const content=r.querySelector('#element-content');
+ if(t.mode==='quiz')elementQuizView(kind,content);else if(t.detail)elementDetail(kind,content);else{
+ content.innerHTML=elementToolbar(kind)+`<p class="small" id="element-results" role="status"></p><div class="element-grid" id="element-grid"></div>`;
+ const fill=()=>{const pool=elementPool(kind);$('#element-results').textContent=`Найдено: ${pool.length}. ${t.mode==='write'?'Выбери символ для прописи.':'Нажми на карточку, чтобы открыть описание.'}`;$('#element-grid').innerHTML=pool.map(e=>`<button class="element-tile" data-element="${e.id}" aria-label="${esc(e.h+' — '+e.r)}">${kind==='strokes'?elementSvg(e):`<span class="zh radical-symbol" lang="zh">${e.h}</span>`}<strong lang="zh">${kind==='strokes'?e.h:'#'+e.id}</strong><span class="element-pinyin">${esc(e.p)}</span><span class="element-meaning">${esc(e.r)}</span><small>${elementStatus(elementProgress[kind+':'+e.id]?.s)}</small></button>`).join('')||'<p>Ничего не найдено. Измени запрос или фильтр.</p>';localizeUI();};
+ fill();$('#element-search').oninput=e=>{t.q=e.target.value;fill();};$('#element-filter').onchange=e=>{t.filter=e.target.value;fill();};if($('#element-count'))$('#element-count').onchange=e=>{t.count=+e.target.value;fill();};
+ }
+ r.querySelectorAll('[data-emode]').forEach(b=>b.onclick=()=>{t.mode=b.dataset.emode;t.quiz=null;render();});$('#element-other').onclick=()=>{S.tab=kind==='strokes'?'radicals':'strokes';render();scrollTo(0,0);};
+ // One delegated handler also handles tiles replaced by search.
+ content.onclick=e=>{const b=e.target.closest('[data-element]');if(!b)return;t.detail=+b.dataset.element;render();scrollTo(0,0);};
+}
+function elementDetail(kind,r){const t=elementState[kind],e=HANZI_ELEMENTS[kind].find(e=>e.id===t.detail);if(!e){t.detail=null;render();return;}
+ r.innerHTML=`<button class="element-back" id="element-back">← В каталог</button><article class="card element-detail"><div class="element-art">${elementVisual(kind,e)}</div><h2 lang="zh">${e.h} · ${esc(e.p)}</h2><div class="tr">${esc(e.r)}</div>${kind==='radicals'?`<p class="element-caption">Ключ №${e.id} · ${e.strokes} черт в традиционной форме</p>`:''}<p>${esc(e.note||(kind==='radicals'?'Это традиционное словарное название ключа. Оно помогает запоминать компонент, но само по себе не определяет значение и чтение целого иероглифа.':''))}</p>${e.variants?`<p>Другие формы: <span class="zh" lang="zh">${esc(e.variants)}</span></p>`:''}${e.examples?`<p>Встречается в знаках: ${e.examples.split(' ').map(h=>`<span class="zh element-chip" lang="zh">${h}</span>`).join('')}</p>`:''}<div class="row"><button class="b" id="element-speak">🔊 Название</button>${kind==='strokes'?'<button class="b" id="element-animate">Показать движение</button>':''}</div>${kind==='strokes'?'<p class="element-caption">Схема движения, не каллиграфический образец. Цветная точка обозначает начало.</p>':''}</article>${t.mode==='write'?'<div class="element-guide">Повтори символ на поле. Это свободная пропись: приложение не оценивает точность и порядок черт.</div><canvas class="element-draw" id="element-canvas" aria-label="Поле для письма пальцем или мышью"></canvas><div class="row"><button class="b" id="element-undo">Отменить штрих</button><button class="b" id="element-clear">Стереть</button><button class="b" id="element-guide">Скрыть образец</button></div>':'<button class="b main" id="element-write">Попробовать написать</button>'}<div class="card"><p class="small">Моя отметка: ${elementStatus(elementProgress[kind+':'+e.id]?.s)}. «Путаю» и «Не знаю» попадут в повторение.</p><div class="element-status">${[['know','Знаю'],['mix','Путаю'],['dont','Не знаю']].map(([s,n])=>`<button class="chip" data-element-mark="${s}" aria-pressed="${elementProgress[kind+':'+e.id]?.s===s}">${n}</button>`).join('')}</div></div>`;
+ $('#element-back').onclick=()=>{t.detail=null;render();};$('#element-speak').onclick=()=>speak(e.h);if($('#element-write'))$('#element-write').onclick=()=>{t.mode='write';render();};
+ if($('#element-animate'))$('#element-animate').onclick=()=>{$('.element-art').innerHTML=elementSvg(e,true);};
+ r.querySelectorAll('[data-element-mark]').forEach(b=>b.onclick=()=>{elementMark(kind,e.id,b.dataset.elementMark);render();});if(t.mode==='write')elementCanvas(kind,e);
+}
+function elementCanvas(kind,e){const c=$('#element-canvas'),x=c.getContext('2d');let lines=[],drawing=false,guide=true;const color=getComputedStyle(document.body).color;
+ function redraw(){const w=c.clientWidth,h=300,d=devicePixelRatio||1;c.width=Math.round(w*d);c.height=h*d;x.setTransform(d,0,0,d,0,0);x.clearRect(0,0,w,h);x.strokeStyle=color;x.lineWidth=1;x.globalAlpha=.15;x.setLineDash([6,6]);for(const [a,b,u,v]of[[0,h/2,w,h/2],[w/2,0,w/2,h],[0,0,w,h],[w,0,0,h]]){x.beginPath();x.moveTo(a,b);x.lineTo(u,v);x.stroke();}x.setLineDash([]);x.globalAlpha=1;
+ if(guide){x.save();x.globalAlpha=.18;if(kind==='strokes'){const size=Math.min(w-24,260);x.translate((w-size)/2,(h-size)/2);x.scale(size/100,size/100);x.lineWidth=7;x.lineCap=x.lineJoin='round';x.stroke(new Path2D(e.path));}else{x.fillStyle=color;x.font='180px "Noto Serif SC", "Songti SC", serif';x.textAlign='center';x.textBaseline='middle';x.fillText(e.h,w/2,h/2);}x.restore();}
+ x.lineWidth=5;x.strokeStyle=color;x.lineCap=x.lineJoin='round';for(const line of lines){if(!line.length)continue;x.beginPath();x.moveTo(line[0][0]*w,line[0][1]*h);for(const p of line)x.lineTo(p[0]*w,p[1]*h);if(line.length===1)x.lineTo(line[0][0]*w+.1,line[0][1]*h+.1);x.stroke();}}
+ function point(ev){const b=c.getBoundingClientRect();return[(ev.clientX-b.left)/b.width,(ev.clientY-b.top)/b.height];}
+ c.onpointerdown=ev=>{drawing=true;c.setPointerCapture(ev.pointerId);lines.push([point(ev)]);redraw();};c.onpointermove=ev=>{if(drawing){lines[lines.length-1].push(point(ev));redraw();}};c.onpointerup=c.onpointercancel=c.onlostpointercapture=()=>drawing=false;
+ $('#element-undo').onclick=()=>{lines.pop();redraw();};$('#element-clear').onclick=()=>{lines=[];redraw();};$('#element-guide').onclick=()=>{guide=!guide;$('#element-guide').textContent=guide?'Скрыть образец':'Показать образец';redraw();localizeUI();};redraw();if('ResizeObserver'in window){elementCanvasObserver=new ResizeObserver(redraw);elementCanvasObserver.observe(c);}
+}
+function elementQuizView(kind,r){const t=elementState[kind];if(!t.quiz){const pool=elementPool(kind);if(!pool.length){r.innerHTML='<div class="card">По выбранным фильтрам нет элементов для теста. Вернись в «Изучать» и измени фильтр.</div>';return;}t.quiz={items:shuffle(pool).slice(0,10),i:0,score:0,wrong:[],answer:null,options:null};}
+ const q=t.quiz;if(q.i>=q.items.length){r.innerHTML=`<div class="card"><h2>Результат: ${q.score} / ${q.items.length}</h2><p>${q.wrong.length?'Повтори сложные элементы:':'Все ответы верные.'}</p>${q.wrong.map(e=>`<p><span class="zh">${e.h}</span> · ${esc(e.p)} — ${esc(e.r)}</p>`).join('')}<button class="b main" id="element-restart">Ещё один тест</button>${q.wrong.length?'<button class="b" id="element-errors">Повторить только ошибки</button>':''}</div>`;$('#element-restart').onclick=()=>{t.quiz=null;render();};if($('#element-errors'))$('#element-errors').onclick=()=>{t.quiz={items:shuffle(q.wrong),i:0,score:0,wrong:[],answer:null,options:null};render();};return;}
+ const e=q.items[q.i];if(!q.options)q.options=shuffle([e,...shuffle(HANZI_ELEMENTS[kind].filter(o=>o.id!==e.id&&o.r!==e.r)).slice(0,3)]);
+ r.innerHTML=`<div class="card element-quiz"><span class="small">Вопрос ${q.i+1} / ${q.items.length}</span><h2>${kind==='strokes'?'Какая это черта?':'Что обозначает ключ?'}</h2><div class="element-art">${elementVisual(kind,e)}</div><div class="element-quiz-options">${q.options.map((o,i)=>`<button class="b ${q.answer!==null?(o.id===e.id?'ok':q.answer===i?'bad':''):''}" data-element-answer="${i}" ${q.answer!==null?'disabled':''}>${esc(o.r)}</button>`).join('')}</div>${q.answer!==null?`<p role="status">${q.options[q.answer].id===e.id?'Верно!':'Правильный ответ:'} ${esc(e.h+' · '+e.p)} — <span>${esc(e.r)}</span></p><button class="b main" id="element-next">${q.i===q.items.length-1?'Результат':'Дальше'}</button>`:''}</div>`;
+ r.querySelectorAll('[data-element-answer]').forEach(b=>b.onclick=()=>{if(q.answer!==null)return;q.answer=+b.dataset.elementAnswer;const ok=q.options[q.answer].id===e.id;if(ok)q.score++;else q.wrong.push(e);elementMark(kind,e.id,ok?'know':'dont');render();});if($('#element-next'))$('#element-next').onclick=()=>{q.i++;q.answer=null;q.options=null;render();};
+}
+
+Object.assign(UI_EN, {"Один": "One", "Вертикальная черта": "Line", "Точка": "Dot", "Откидная влево": "Down-left stroke", "Второй циклический знак; изгиб": "Second", "Крюк": "Hook", "Два": "Two", "Крышка": "Lid", "Человек": "Man", "Ноги; человек снизу": "Legs", "Входить": "Enter", "Восемь; разделение": "Eight", "Открытая рамка": "Down box", "Покрытие": "Cover", "Лёд": "Ice", "Столик": "Table", "Открытая ёмкость": "Open box", "Нож": "Knife", "Сила": "Power", "Обёртывать": "Wrap", "Ложка": "Spoon", "Короб с открытым боком": "Right open box", "Укрытие": "Hiding enclosure", "Десять": "Ten", "Гадание": "Divination", "Печать; коленопреклонённый человек": "Seal", "Утёс": "Cliff", "Личный; частный": "Private", "Правая рука; снова": "Again", "Рот": "Mouth", "Ограда": "Enclosure", "Земля": "Earth", "Учёный; служилый человек": "Scholar", "Идти; следовать": "Go", "Медленно идти": "Go slowly", "Вечер": "Evening", "Большой": "Big", "Женщина": "Woman", "Ребёнок": "Child", "Крыша": "Roof", "Цунь; мера длины": "Inch", "Маленький": "Small", "Искривлённая нога": "Lame", "Тело; труп": "Corpse", "Росток": "Sprout", "Гора": "Mountain", "Река": "River", "Работа; инструмент": "Work", "Сам; шестой циклический знак": "Oneself", "Ткань; полотенце": "Turban", "Щит": "Dry", "Тонкая нить; малый": "Short thread", "Навес": "Dotted cliff", "Длинный шаг": "Long stride", "Две руки": "Two hands", "Стрела с привязанной нитью": "Shoot", "Лук": "Bow", "Свиное рыло": "Snout", "Волоски; узор": "Bristle", "Шаг левой ногой": "Step", "Сердце": "Heart", "Клевец; древнее оружие": "Halberd", "Дверь; двор": "Door", "Рука": "Hand", "Ветвь; поддерживать": "Branch", "Ударять": "Rap", "Письменность; узор": "Script", "Ковш": "Dipper", "Топор; мера веса": "Axe", "Квадрат; сторона": "Square", "Отсутствие": "Not", "Солнце; день": "Sun", "Говорить": "Say", "Луна; месяц": "Moon", "Дерево": "Tree", "Недоставать; зевать": "Lack", "Останавливаться; стопа": "Stop", "Смерть; останки": "Death", "Древковое оружие": "Weapon", "Не следует; запрет": "Do not", "Сравнивать": "Compare", "Шерсть; волосы": "Fur", "Род; фамилия": "Clan", "Воздух; пар": "Steam", "Вода": "Water", "Огонь": "Fire", "Коготь": "Claw", "Отец": "Father", "Перекрещённые линии": "Double x", "Половина ствола; доска": "Half tree trunk", "Щепка; пластина": "Slice", "Клык; зуб": "Fang", "Бык; корова": "Cow", "Собака": "Dog", "Тёмный; сокровенный": "Profound", "Нефрит": "Jade", "Дыня": "Melon", "Черепица": "Tile", "Сладкий": "Sweet", "Рождаться; жизнь": "Life", "Использовать": "Use", "Поле": "Field", "Кусок ткани; нога": "Bolt of cloth", "Болезнь": "Sickness", "Расходящиеся ноги": "Dotted tent", "Белый": "White", "Кожа; шкура": "Skin", "Сосуд": "Dish", "Глаз": "Eye", "Копьё": "Spear", "Стрела": "Arrow", "Камень": "Stone", "Алтарь; показывать": "Spirit", "След зверя": "Track", "Злак": "Grain", "Пещера": "Cave", "Стоять": "Stand", "Бамбук": "Bamboo", "Рис": "Rice", "Шёлк": "Silk", "Глиняный кувшин": "Jar", "Сеть": "Net", "Баран; овца": "Sheep", "Перья": "Feather", "Старый": "Old", "Борода; а также": "And", "Плуг": "Plow", "Ухо": "Ear", "Кисть для письма": "Brush", "Мясо": "Meat", "Слуга": "Minister", "Нос; сам": "Self", "Достигать": "Arrive", "Ступка": "Mortar", "Язык": "Tongue", "Противоположные ноги": "Oppose", "Лодка": "Boat", "Останавливаться; граница": "Stopping", "Цвет": "Color", "Трава": "Grass", "Тигр": "Tiger", "Насекомое": "Insect", "Кровь": "Blood", "Движение; идти": "Walk enclosure", "Одежда": "Clothes", "Покрывать": "West", "Видеть": "See", "Рог": "Horn", "Речь": "Speech", "Долина": "Valley", "Боб": "Bean", "Свинья": "Pig", "Зверь": "Badger", "Раковина; ценность": "Shell", "Красный": "Red", "Идти; бежать": "Run", "Стопа; нога": "Foot", "Тело": "Body", "Повозка": "Cart", "Горький; острый": "Bitter", "Время; циклический знак": "Morning", "Движение; путь": "Walk", "Город": "City", "Винный сосуд": "Wine", "Различать; разделять": "Distinguish", "Деревня; мера расстояния": "Village", "Металл; золото": "Gold", "Длинный": "Long", "Ворота": "Gate", "Холм": "Mound", "Достигать; ловить": "Slave", "Короткохвостая птица": "Short tailed bird", "Дождь": "Rain", "Сине-зелёный": "Blue", "Не; отрицание": "Wrong", "Лицо": "Face", "Выделанная кожа": "Leather", "Дублёная кожа; окружать": "Tanned leather", "Лук-порей": "Leek", "Звук": "Sound", "Голова": "Leaf", "Ветер": "Wind", "Лететь": "Fly", "Еда": "Eat", "Голова; начало": "Head", "Аромат": "Fragrant", "Лошадь": "Horse", "Кость": "Bone", "Высокий": "Tall", "Длинные волосы": "Hair", "Борьба": "Fight", "Жертвенное вино": "Sacrificial wine", "Треножник для варки": "Cauldron", "Дух; призрак": "Ghost", "Рыба": "Fish", "Птица": "Bird", "Соль": "Salt", "Олень": "Deer", "Пшеница": "Wheat", "Конопля": "Hemp", "Жёлтый": "Yellow", "Просо": "Millet", "Чёрный": "Black", "Вышивать": "Embroidery", "Лягушка": "Frog", "Треножник": "Tripod", "Барабан": "Drum", "Мышь": "Rat", "Нос": "Nose", "Ровный": "Even", "Зубы": "Tooth", "Дракон": "Dragon", "Черепаха": "Turtle", "Древняя флейта": "Flute", "Горизонтальная": "Horizontal", "Слева направо. Держи направление ровным, без крюка на конце.": "Move from left to right, keeping a steady direction without a final hook.", "Вертикальная": "Vertical", "Сверху вниз. В этой форме нет крюка на конце.": "Move from top to bottom. This form has no final hook.", "Начни сверху справа и веди вниз влево, постепенно облегчая нажим.": "Start at the upper right and move down to the left, gradually lifting pressure.", "Откидная вправо": "Down-right stroke", "Веди сверху слева вниз вправо. Ближе к концу линия раскрывается вправо.": "Move from the upper left down to the right, opening the line toward the end.", "Короткое движение сверху слева вниз вправо. Это штрих, а не круглая точка.": "Make a short movement down and right. This is a small stroke, not a round dot.", "Восходящая": "Rising stroke", "Снизу слева вверх вправо. Заверши движение острым выходом.": "Move from the lower left up to the right. Finish with a pointed exit.", "Вертикальная с крюком": "Vertical hook", "Веди вниз, затем сделай короткий крюк вверх влево, не отрывая руки.": "Move downward, then make a short hook up and left without lifting your hand.", "Изогнутая с крюком": "Curved hook", "Проведи плавный изгиб вниз, затем короткий крюк влево вверх.": "Make a smooth curve downward, then a short hook up and left.", "Наклонная с крюком": "Slanting hook", "По диагонали вниз вправо с плавным изгибом; внизу крюк вверх.": "Move diagonally down and right in a smooth curve; finish with an upward hook.", "Горизонтальная с крюком": "Horizontal hook", "Слева направо, затем короткий крюк вниз влево.": "Move right, then make a short hook down and left.", "Горизонтальная с поворотом вниз": "Horizontal turn downward", "Слева направо, затем вниз. Поворот выполняется без отрыва руки.": "Move right, then downward. Turn without lifting your hand.", "Вертикальная с поворотом вправо": "Vertical turn right", "Сверху вниз, затем вправо; это одна непрерывная черта.": "Move downward, then right in one continuous stroke.", "Горизонтальная с откидной влево": "Horizontal then down-left", "Сначала вправо, затем поворот и откидная вниз влево.": "Move right, then turn and sweep down to the left.", "Откидная влево с поворотом": "Down-left then turn right", "Вниз влево, затем поворот вправо с небольшим подъёмом.": "Move down and left, then turn right with a slight rise.", "Откидная влево с точкой": "Down-left then dot", "Вниз влево, затем вправо вниз. Две части пишутся без отрыва.": "Move down and left, then down and right without lifting your hand.", "Горизонтальная с поворотом и крюком": "Horizontal turn with hook", "Вправо, затем вниз, в конце короткий крюк вверх влево.": "Move right, then down; finish with a short hook up and left.", "Горизонтальная с изгибом и крюком": "Horizontal turn, curve and hook", "Вправо, затем вниз с изгибом; внизу поверни вправо и закончи крюком вверх.": "Move right, then down in a curve; turn right at the bottom and hook upward.", "Вертикальная с поворотами и крюком": "Vertical turn, curve and hook", "Вниз, затем вправо и снова вниз; в конце короткий крюк влево вверх.": "Move down, then right and down again; finish with a short hook up and left.", "Вертикальная с изгибом и крюком": "Vertical curve and hook", "Вниз, затем плавно поверни вправо и закончи коротким крюком вверх.": "Move down, then curve smoothly right and finish with a short upward hook.", "Слева часто превращается в 亻: 你, 他. Этот компонент связан с человеком, но не даёт готового перевода всего знака.": "On the left it often becomes 亻, as in 你 and 他. It is associated with people, but does not translate the whole character.", "Как ключ читается jī и означает столик. Иероглиф 几 в значении «сколько» читается jǐ — это другое употребление.": "As a radical, jī means a small table. The independent 几 meaning “how many” is pronounced jǐ.", "Как традиционный ключ — hǎn, «утёс». Современное 厂 «завод» читается chǎng.": "The traditional radical is hǎn, “cliff”. The modern word 厂 “factory” is chǎng.", "Не путай 口 «рот» и более крупную внешнюю ограду 囗 (ключ №31).": "Do not confuse 口 “mouth” with the larger outer enclosure 囗, radical 31.", "Окружает другие части: например, в 国. Не путай с самостоятельным 口 «рот».": "It surrounds other parts, as in 国. Compare the independent 口 “mouth”.", "В 士 верхняя горизонталь длиннее нижней; у 土 соотношение обычно обратное.": "In 士 the top horizontal is longer; in 土 the proportions are usually reversed.", "Не путай с 土: у 士 верхняя горизонталь обычно длиннее нижней.": "Compare 土: the upper horizontal in 士 is usually longer than the lower one.", "Обычно располагается сверху: 家, 安. Условное название — «крыша».": "Usually sits on top, as in 家 and 安. Its conventional name is “roof”.", "Традиционное чтение ключа — yǎn. Современное 广 «широкий» читается guǎng.": "The traditional radical name is yǎn. The modern word 广 “broad” is guǎng.", "Слева имеет форму 忄, внизу встречается 心 или ⺗. Часто участвует в знаках чувств и мыслей.": "On the left it becomes 忄; at the bottom it can appear as 心 or ⺗. Often used in characters for feelings and thoughts.", "Слева обычно 扌: 打, 找. Часто участвует в обозначениях ручных действий.": "Usually 扌 on the left, as in 打 and 找. Often associated with manual actions.", "Солнце и день. Сравни с 曰 (№73): различаются пропорциями и назначением.": "Sun or day. Compare 曰, radical 73: their proportions and roles differ.", "Луна или месяц. Похожий компонент 月 в названиях частей тела часто восходит к 肉 (№130).": "Moon or month. The similar 月 component in body-part characters often comes from 肉, radical 130.", "Дерево. В составе иероглифа может указывать на растения и деревянные предметы.": "Tree. It may suggest plants or wooden objects within a character.", "Слева обычно 氵: 河, 海. Это вариант ключа 水, а не три отдельные точки.": "Usually 氵 on the left, as in 河 and 海. This is a form of 水, not three unrelated dots.", "Внизу часто 灬: 热. Четыре точки здесь — вариант ключа огня.": "Often 灬 at the bottom, as in 热. These four dots represent the fire radical.", "В составе часто выглядит как 王: 理, 珠. Это позиционная форма ключа 玉.": "Often shaped like 王 in compounds, as in 理 and 珠. This is a positional form of 玉.", "Слева обычно 礻. Не путай с 衤 «одежда» (№145): у неё есть дополнительная черта.": "Usually 礻 on the left. Compare 衤 “clothing”, radical 145, which has an extra stroke.", "Сверху обычно ⺮: 笔, 笑. Две группы коротких черт представляют бамбук.": "Usually ⺮ on top, as in 笔 and 笑. The two groups of short strokes represent bamboo.", "Слева традиционное 糹; в упрощённой письменности — 纟: 红, 纸.": "The traditional left-hand form is 糹; the simplified form is 纟, as in 红 and 纸.", "В составных знаках часто выглядит как 月: 肚, 腿. Не всякая форма 月 обозначает луну.": "Often resembles 月 in compounds, as in 肚 and 腿. Not every 月-shaped component means moon.", "Сверху обычно 艹: 花, 茶. Традиционная форма ключа — 艸.": "Usually 艹 on top, as in 花 and 茶. The traditional radical form is 艸.", "Слева обычно 衤: 裤, 被. Не путай с похожим 礻 «алтарь» (№113).": "Usually 衤 on the left, as in 裤 and 被. Compare 礻 “altar”, radical 113.", "Традиционная форма 言; слева в упрощённых знаках обычно 讠: 说, 话.": "Traditional 言 usually becomes 讠 on the left in simplified characters, as in 说 and 话.", "Часто окружает знак снизу и слева в форме 辶: 这, 近.": "Often wraps a character from below and the left as 辶, as in 这 and 近.", "В составе справа обычно 阝: 都, 部. Похожая форма слева относится к 阜 (№170).": "Usually 阝 on the right, as in 都 and 部. The similar left-hand form belongs to 阜, radical 170.", "В составе слева обычно 阝: 阳, 院. Похожая форма справа относится к 邑 (№163).": "Usually 阝 on the left, as in 阳 and 院. The similar right-hand form belongs to 邑, radical 163.", "Черты": "Strokes", "Ключи": "Radicals", "Ключи Канси": "Kangxi radicals", "ХАНЬЦЗЫ · 汉字笔画": "HANZI · 汉字笔画", "ХАНЬЦЗЫ · 部首": "HANZI · 部首", "в каталоге": "in catalogue", "освоено": "learned", "к повторению": "to review", "Изучать": "Study", "Писать": "Write", "Тесты": "Quizzes", "Ключи →": "Radicals →", "Черты →": "Strokes →", "Освоено": "Learned", "Изучается": "Learning", "К повторению": "To review", "Новое": "New", "Новые": "New", "Освоенные": "Learned", "← В каталог": "← Catalogue", "🔊 Название": "🔊 Name", "Показать движение": "Show movement", "Другие формы:": "Other forms:", "Встречается в знаках:": "Found in characters:", "Попробовать написать": "Try writing", "Отменить штрих": "Undo stroke", "Скрыть образец": "Hide model", "Поиск по элементам": "Search elements", "Символ, пиньинь, значение или номер": "Symbol, pinyin, meaning or number", "Фильтр по изучению": "Filter by learning status", "Количество черт в традиционном ключе": "Strokes in traditional form", "Любое число черт": "Any stroke count", "Ещё один тест": "Another quiz", "Повторить только ошибки": "Retry mistakes", "Какая это черта?": "Which stroke is this?", "Что обозначает ключ?": "What does this radical mean?", "Правильный ответ:": "Correct answer:", "Верно!": "Correct!", "Все ответы верные.": "All answers are correct.", "Повтори сложные элементы:": "Review these elements:", "Поле для письма пальцем или мышью": "Writing area for touch or mouse", "Начертание · черты и ключи": "Writing · strokes and radicals", "Черты и ключи": "Strokes and radicals", "Черта — одно движение без отрыва руки. Здесь 19 учебных форм; это начальная подборка, а не все возможные черты китайской письменности.": "A stroke is one movement without lifting your hand. These 19 forms are an introductory selection, not a complete classification of Chinese strokes.", "Ключ (部首) — компонент для поиска иероглифа в словаре. Здесь все 214 ключей Канси. Ключи состоят из черт; не каждый компонент иероглифа является его словарным ключом.": "A radical (部首) is a component used to look up a character in a dictionary. All 214 Kangxi radicals are included. Radicals consist of strokes; not every component is a dictionary radical.", "Это традиционное словарное название ключа. Оно помогает запоминать компонент, но само по себе не определяет значение и чтение целого иероглифа.": "This is the traditional dictionary name of the radical. It helps you remember the component, but does not determine the meaning or pronunciation of the whole character.", "Схема движения, не каллиграфический образец. Цветная точка обозначает начало.": "A movement diagram, not a calligraphy model. The coloured dot marks the start.", "Повтори символ на поле. Это свободная пропись: приложение не оценивает точность и порядок черт.": "Copy the symbol in the writing area. This is free practice; accuracy and stroke order are not graded.", "Не удалось прочитать или сохранить прогресс элементов. Проверь хранилище браузера.": "Could not read or save element progress. Check browser storage.", "Ничего не найдено. Измени запрос или фильтр.": "No matches. Change the search or filter.", "По выбранным фильтрам нет элементов для теста. Вернись в «Изучать» и измени фильтр.": "No elements match these quiz filters. Return to Study and change the filter.", "Unicode: 214 ключей Канси": "Unicode: 214 Kangxi radicals", "Unicode: названия черт": "Unicode: stroke names", "Сверка чтений ключей": "Radical pronunciation reference", "В меню: «Черты» — 19 учебных форм с показом движения; «Ключи» — все 214 ключей Канси с пиньинем и русскими значениями. Ключ состоит из черт и служит для поиска в словаре. Не каждый компонент является словарным ключом; его значение не даёт готового перевода целого иероглифа.": "The menu includes Strokes: 19 study forms with movement diagrams; and Radicals: all 214 Kangxi radicals with pinyin and English/Russian meanings. A radical consists of strokes and is used for dictionary lookup. Not every component is a dictionary radical, and its meaning does not translate the whole character.", "Русские пояснения и SVG-схемы составлены для приложения. Число черт указано для традиционной формы ключа. Пиньинь — чтение названия ключа; оно иногда отличается от чтения современного слова. Примеры и дополнительные пояснения даны для распространённых ключей.": "Russian explanations, English study labels and SVG diagrams were prepared for this app. Stroke counts refer to the traditional radical form. Pinyin gives the radical name, which may differ from the modern word. Examples and extra notes are supplied for common radicals.", "Отметки элементов хранятся отдельно от прогресса словаря. Пропись свободная: точность и порядок черт не оцениваются. К повторению относятся элементы с отметками «Путаю» и «Не знаю»; календарного расписания нет. Анимация есть у отдельных черт, не у составных ключей.": "Element marks are stored separately from vocabulary progress. Free writing does not grade accuracy or stroke order. Review includes elements marked Not sure or I do not know it; there is no calendar schedule. Movement animation is available for individual strokes, not compound radicals."});
+const previousElementTr=tr;
+tr=function(value){if(!enMode())return String(value);const text=String(value),trimmed=text.trim();if(Object.prototype.hasOwnProperty.call(UI_EN,trimmed))return text.replace(trimmed,UI_EN[trimmed]);return previousElementTr(text)
+.replace(/^Освоено (\d+) \/ (\d+)$/,'Learned $1 / $2')
+.replace(/^(\d+) в каталоге$/,'$1 in catalogue')
+.replace(/^(\d+) черт$/,'$1 strokes')
+.replace(/^Ключ №(\d+) · (\d+) черт в традиционной форме$/,'Radical $1 · $2 strokes in traditional form')
+.replace(/^Найдено: (\d+)\. Выбери символ для прописи\.$/,'Found: $1. Choose a symbol to practise writing.')
+.replace(/^Найдено: (\d+)\. Нажми на карточку, чтобы открыть описание\.$/,'Found: $1. Open a card to read its description.')
+.replace(/^Моя отметка: (.+)\. «Путаю» и «Не знаю» попадут в повторение\.$/,(_,status)=>'My mark: '+previousElementTr(status)+'. Not sure and I do not know it enter the review list.')
+.replace(/^Вопрос (\d+) \/ (\d+)$/,'Question $1 / $2')
+.replace(/^Результат: (\d+) \/ (\d+)$/,'Result: $1 / $2')
+.replace(/^Правильный ответ: /,'Correct answer: ').replace(/^Верно! /,'Correct! ')
+.replace(/（справа）/g,' (right)').replace(/（слева）/g,' (left)');};
+
+const previousInfoView=V.info;V.info=r=>{previousInfoView(r);r.insertAdjacentHTML('beforeend',`<div class=card><h2>Черты и ключи</h2><p>В меню: «Черты» — 19 учебных форм с показом движения; «Ключи» — все 214 ключей Канси с пиньинем и русскими значениями. Ключ состоит из черт и служит для поиска в словаре. Не каждый компонент является словарным ключом; его значение не даёт готового перевода целого иероглифа.</p><p>Русские пояснения и SVG-схемы составлены для приложения. Число черт указано для традиционной формы ключа. Пиньинь — чтение названия ключа; оно иногда отличается от чтения современного слова. Примеры и дополнительные пояснения даны для распространённых ключей.</p><p><a href="https://www.unicode.org/charts/PDF/U2F00.pdf" target=_blank rel=noopener>Unicode: 214 ключей Канси</a> · <a href="https://www.unicode.org/versions/Unicode17.0.0/core-spec/appendix-f/" target=_blank rel=noopener>Unicode: названия черт</a> · <a href="https://www.hsk.guide/radicals" target=_blank rel=noopener>Сверка чтений ключей</a></p><p class=small>Отметки элементов хранятся отдельно от прогресса словаря. Пропись свободная: точность и порядок черт не оцениваются. К повторению относятся элементы с отметками «Путаю» и «Не знаю»; календарного расписания нет. Анимация есть у отдельных черт, не у составных ключей.</p></div>`);};
+V.strokes=r=>elementView('strokes',r);V.radicals=r=>elementView('radicals',r);
+
+const TABS=[['lessons','Уроки'],['dict','Словарь'],['cards','Карточки'],['quiz','Тест'],['sent','Фразы'],['write','Пропись'],['fix','Ошибки'],['info','Инфо'],['access','Доступ'],['strokes','Черты'],['radicals','Ключи']];
 
 const MENU_ICONS=[
  'M4 5h16v16H4z M8 3v4 M16 3v4 M8 11h8 M8 15h5',
@@ -248,6 +2654,7 @@ const MENU_ICONS=[
  'M12 8h.01 M12 11v6 M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18',
  'M5 10h14v11H5z M8 10V7a4 4 0 0 1 8 0v3 M12 14v3'
 ];
+MENU_ICONS.push('M4 6h16 M12 4v16 M5 18l5-5 M16 14l4 5','M4 4h6v6H4z M14 4h6v6h-6z M4 14h6v6H4z M14 14h6v6h-6z');
 let menuOpen=false;
 function setMenu(open,restoreFocus=false){
  menuOpen=open;$('#nav').classList.toggle('is-open',open);$('#menu-backdrop').classList.toggle('is-open',open);
@@ -273,7 +2680,8 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&menuOpen){e.prevent
 document.addEventListener('focusin',e=>{if(menuOpen&&!$('#nav').contains(e.target))setMenu(false)});
 
 function render(){document.documentElement.lang=S.lang;$('#nav').setAttribute('aria-label','Разделы приложения');coursePrefs.scopes[S.course]=S.scope;try{localStorage.setItem('cc2-courses',JSON.stringify({course:S.course,scopes:coursePrefs.scopes}));localStorage.setItem('cc2-settings',JSON.stringify({scope:coursePrefs.scopes.book||'all',extra:S.extra,names:S.names,hidePy:S.hidePy,mode:S.mode}))}catch(e){storageOK=false}const groups=activeGroups();$('#progress').textContent=!allowedCourse()?'Доступ закрыт':'Знаю '+groups.filter(g=>P[g.h]?.s==='know').length+' / '+groups.length;$('#storage-warning').textContent=storageOK?'':'Прогресс может не сохраниться: хранилище браузера недоступно или повреждено.';document.querySelector('.app-header strong').textContent=enMode()?'汉语 · Chinese':'汉语 · Китайский';courseBar();renderMenu();
- statusBar();if(BOOT?.access.blocked&&!['access','info'].includes(S.tab))lockedView($('#app'));else if(!allowedCourse()&&!['access','info'].includes(S.tab))lockedView($('#app'));else if(!allowedLesson(S.scope)&&!['lessons','access','info'].includes(S.tab))lockedView($('#app'),true);else V[S.tab]($('#app'));bindF($('#app'));if(S.tab==='info')backupControls();localizeUI()}
+ const elements=['strokes','radicals'].includes(S.tab);$('#course-bar').hidden=elements;if(elementCanvasObserver){elementCanvasObserver.disconnect();elementCanvasObserver=null;}if(elements){$('#course-subtitle').textContent='Начертание · черты и ключи';const items=HANZI_ELEMENTS[S.tab];$('#progress').textContent='Освоено '+items.filter(e=>elementProgress[S.tab+':'+e.id]?.s==='know').length+' / '+items.length;}
+ statusBar();if(BOOT?.access.blocked&&!['access','info'].includes(S.tab))lockedView($('#app'));else if(!allowedCourse()&&!['access','info','strokes','radicals'].includes(S.tab))lockedView($('#app'));else if(!allowedLesson(S.scope)&&!['lessons','access','info','strokes','radicals'].includes(S.tab))lockedView($('#app'),true);else V[S.tab]($('#app'));bindF($('#app'));if(S.tab==='info')backupControls();localizeUI()}
 render();
 if(BOOT&&authData){let checking=false;const check=async()=>{if(checking||document.hidden)return;checking=true;try{const r=await fetch('/api/access',{method:'POST',headers:authHeaders(),body:'{}'});if(r.ok){const data=await r.json();if(data.revision!==BOOT.access.revision)location.reload()}else if(r.status===401){BOOT.sessionExpired=true;BOOT.access={...BOOT.access,book:0,hsk:0,blocked:true};BOOT.user=null;resetTraining();render();$('#storage-warning').textContent=tr('Не удалось обновить доступ. Закройте и снова откройте приложение в Telegram.')}}catch(e){}finally{checking=false}};setInterval(check,60000);document.addEventListener('visibilitychange',check)}
 }
