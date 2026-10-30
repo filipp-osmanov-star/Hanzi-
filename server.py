@@ -85,7 +85,7 @@ class CourseRepository:
     def __init__(self, path):
         self.html = Path(path).read_text(encoding='utf-8')
         datasets = {}
-        for name, attr in [('DATA','data'),('CURRICULUM','curriculum'),('LOCALE_DATA','locale')]:
+        for name, attr in [('DATA','data'),('CURRICULUM','curriculum'),('LOCALE_DATA','locale'),('EXAM_DATA','exam')]:
             pattern = re.compile(r'const ' + name + r'=BOOT\?BOOT\.' + attr + r':(.*);\n')
             match = pattern.search(self.html)
             if not match:
@@ -94,6 +94,7 @@ class CourseRepository:
             self.html, count = pattern.subn('const ' + name + '=BOOT.' + attr + ';\n', self.html, count=1)
             assert count == 1
         self.data, self.curriculum, self.locale = datasets['data'], datasets['curriculum'], datasets['locale']
+        self.exam = datasets['exam']
 
     def shell(self, nonce):
         html = self.html.replace('<head>', '<head><meta name="referrer" content="no-referrer">', 1)
@@ -135,7 +136,10 @@ class CourseRepository:
         if '汉语很难。' in available_examples:
             locale['examples']['汉语很难。'] = dict(r='Chinese is difficult.',x='很 links the subject to an adjective. 是 is not needed here.')
         locale['grammar'] = {k:v for k,v in locale['grammar'].items() if k in permitted_grammar}
-        return dict(data=data, curriculum=curriculum, locale=locale)
+        # This paper spans lessons 1–13. Never send any questions, answers or
+        # embedded pictures to a trial, partial textbook or blocked account.
+        exam = copy.deepcopy(self.exam) if book >= 13 and not caps.get('blocked') else None
+        return dict(data=data, curriculum=curriculum, locale=locale, exam=exam)
 
 
 class Application:
@@ -226,3 +230,4 @@ if __name__ == '__main__':
     print(f'Local test server on http://127.0.0.1:{args.port}')
     with make_server('127.0.0.1', args.port, app) as httpd:
         httpd.serve_forever()
+
